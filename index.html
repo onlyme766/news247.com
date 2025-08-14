@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BDNews247 - Bilingual News Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f9f9f9;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    .logo {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+    .buttons a {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .buttons a:hover {
+      background: #0056b3;
+    }
+    .news-section {
+      display: none;
+      text-align: left;
+      margin-top: 30px;
+    }
+    .back {
+      margin-top: 20px;
+      display: inline-block;
+      color: #007bff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://via.placeholder.com/100x100.png?text=Logo" alt="Logo" class="logo">
+    <h1>Welcome to BDNews247</h1>
+    <p>Select your language:</p>
+    <div class="buttons">
+      <a href="#" onclick="showNews('bn')">বাংলা</a>
+      <a href="#" onclick="showNews('en')">English</a>
+    </div>
+
+    <div id="bn" class="news-section">
+      <h2>আজকের শীর্ষ সংবাদ</h2>
+      <ul>
+        <li>ঢাকায় বৃষ্টির সম্ভাবনা, জনজীবনে প্রভাব</li>
+        <li>বাংলাদেশ বনাম ভারত: আজকের ম্যাচ বিশ্লেষণ</li>
+        <li>নতুন বাজেট ঘোষণা, কোন খাতে বেশি বরাদ্দ?</li>
+      </ul>
+      <div class="back" onclick="goBack()">🔙 ভাষা পরিবর্তন করুন</div>
+    </div>
+
+    <div id="en" class="news-section">
+      <h2>Top Headlines Today</h2>
+      <ul>
+        <li>Rain forecast in Dhaka, commuters brace for delays</li>
+        <li>Bangladesh vs India: Match preview and predictions</li>
+        <li>New budget unveiled: Key sectors get major boost</li>
+      </ul>
+      <div class="back" onclick="goBack()">🔙 Change Language</div>
+    </div>
+  </div>
+
+  <script>
+    function showNews(lang) {
+      document.querySelector('.buttons').style.display = 'none';
+      document.getElementById(lang).style.display = 'block';
+    }
+    function goBack() {
+      document.querySelector('.buttons').style.display = 'block';
+      document.getElementById('bn').style.display = 'none';
+      document.getElementById('en').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
