@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News247 | বাংলা ও English নিউজ</title>
+  <meta name="description" content="News247 - Real-time বাংলা ও English নিউজ সাইট, Firebase দ্বারা চালিত।" />
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+    header {
+      background: #004080;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav button {
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: white;
+      color: #004080;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    main {
+      padding: 1rem;
+    }
+    article {
+      background: white;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-left: 5px solid #004080;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #eee;
+      font-size: 0.9rem;
+    }
+  </style>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+  <header>
+    <h1>📰 News247</h1>
+    <nav>
+      <button onclick="switchLang('en')">English</button>
+      <button onclick="switchLang('bn')">বাংলা</button>
+    </nav>
+  </header>
+
+  <main id="news-container">
+    <p>Loading news...</p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 News247 | Powered by Firebase</p>
+  </footer>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT.firebaseio.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    let currentLang = 'en';
+
+    function switchLang(lang) {
+      currentLang = lang;
+      loadNews();
+    }
+
+    function loadNews() {
+      db.ref(`news/${currentLang}`).once('value', snapshot => {
+        const container = document.getElementById('news-container');
+        container.innerHTML = '';
+        snapshot.forEach(item => {
+          const data = item.val();
+          const article = document.createElement('article');
+          article.innerHTML = `<h2>${data.title}</h2><p>${data.body}</p>`;
+          container.appendChild(article);
+        });
+      });
+    }
+
+    loadNews();
+  </script>
+</body>
+</html>
